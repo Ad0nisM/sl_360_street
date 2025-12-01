@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>secondlayers 360° Demo in Kiel</title>
+
+  <!-- Pannellum -->
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+
+  <style>
+    html, body {
+       margin: 0;
+       padding: 0;
+       height: 100%;
+       overflow: hidden;
+    }
+
+    #panorama {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="panorama"></div>
+
+<script>
+  var viewer = pannellum.viewer('panorama', {
+    "default": {
+      "firstScene": "Nummer_1",
+      "sceneFadeDuration": 1000,
+      "hfov": 120,
+      "autoLoad": true,
+      "disableZoom": true,
+      "keyboardZoom": false,
+      "mouseZoom": false,
+      "preview": "Nummer_1.avif"
+      // "yaw": 120  // kann hier drin bleiben, ist aber nicht nötig
+    },
+
+    "scenes": {
+      "Nummer_1": {
+        "type": "equirectangular",
+        "panorama": "Nummer_1.avif",
+        "hfov": 120,
+        "autoLoad": true,
+        "yaw": 360,     <!-- HIER geändert -->
+        "pitch": 0,
+        "hotSpots":[
+          {
+            "pitch": -2,
+            "yaw": 363,
+            "type": "scene",
+            "sceneId": "Nummer_2"
+          }
+        ]
+      },
+
+      "Nummer_2": {
+        "type": "equirectangular",
+        "panorama": "Nummer_2.avif",
+        "hfov": 120,
+        "autoLoad": true,
+        "hotSpots": [
+          {
+            "pitch": 0,
+            "yaw": 227,
+            "type": "scene",
+            "sceneId": "Nummer_1"
+          },
+          {
+            "pitch": 0,
+            "yaw": 135,
+            "type": "scene",
+            "sceneId": "Nummer_3"
+          }
+        ]
+      },
+
+      "Nummer_3": {
+        "type": "equirectangular",
+        "panorama": "Nummer_3.avif",
+        "hfov": 200,
+        "autoLoad": true,
+        "yaw": 120,
+        "hotSpots": [
+          {
+            "pitch": 0,
+            "yaw": 51,
+            "type": "scene",
+            "sceneId": "Nummer_2"
+          },
+          {
+            "pitch": 1,
+            "yaw": -140,
+            "type": "scene",
+            "sceneId": "Nummer_4"
+          }
+        ]
+      },
+
+      "Nummer_4": {
+        "type": "equirectangular",
+        "panorama": "Nummer_4.avif",
+        "hfov": 200,
+        "autoLoad": true,
+        "yaw": 120,
+        "hotSpots": [
+          {
+            "pitch": -2,
+            "yaw": -15,
+            "type": "scene",
+            "sceneId": "Nummer_3"
+          },
+          
+        ]
+      },
+
+      "Nummer_5": {
+        "type": "equirectangular",
+        "panorama": "Nummer_5.avif",
+        "hfov": 200,
+        "autoLoad": true,
+        "yaw": 120,
+        "hotSpots": [
+          {
+            "pitch": -2,
+            "yaw": 100,
+            "type": "scene",
+            "sceneId": "Nummer_4"
+          },
+          {
+            "pitch": -2,
+            "yaw": 180,
+            "type": "scene",
+            "sceneId": "Nummer_2"
+          }
+        ]
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
